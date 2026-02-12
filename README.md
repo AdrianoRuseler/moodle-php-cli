@@ -29,7 +29,7 @@ docker exec -it -u www-data moodle-cron composer install --no-dev --classmap-aut
 ## Initialize Moodle database for manual testing
 
 ```bash
-docker exec -it -u www-data moodle-cron php admin/cli/install_database.php --agree-license --fullname="Docker moodle" --shortname="docker_moodle" --summary="Docker moodle site" --adminpass="m@0dl3ing" --adminemail="admin@example.com"
+docker exec -it -u www-data moodle-cron php admin/cli/install_database.php --agree-license --fullname="Docker moodle" --shortname="docker_moodle" --summary="Docker moodle site" --adminpass="M@0dl3ing" --adminemail="admin@example.com"
 ```
 
 ## Moodle CLI
@@ -78,12 +78,9 @@ docker exec -it -u www-data moodle-cron php -i | grep opcache.enable_cli
 docker exec -it -u www-data moodle-cron php --ri "Zend OPcache"
 ```
 
-
 I noticed apcu and memcached are also in your list.
-
-    Since you are already using Redis, you generally don't need Memcached.
-
-    APCu is excellent for Moodle's "Local Cache" (MUC).
+Since you are already using Redis, you generally don't need Memcached.
+APCu is excellent for Moodle's "Local Cache" (MUC).
 
 ```bash
 docker exec -u www-data moodle-cron php --ri apcu  
@@ -110,3 +107,6 @@ docker exec -it -u www-data moodle-cron php admin/cli/scheduled_task.php --execu
 
 
 php admin/cli/fix_course_sequence.php -c=* --fix
+
+
+docker exec -it moodle-cron locale -a
