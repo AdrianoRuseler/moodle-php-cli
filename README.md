@@ -15,6 +15,7 @@ docker pull php:8.4-cli-trixie
 docker build -t ruseler/moodle-php-cli:latest .
 ```
 
+php -r "echo date('Y-m-d H:i:s');"
 
 ## Composer
 
@@ -105,8 +106,34 @@ docker exec -it -u www-data moodle-cron php admin/cli/scheduled_task.php --list
 docker exec -it -u www-data moodle-cron php admin/cli/scheduled_task.php --execute=\core\task\h5p_get_content_types_task
 ```
 
+docker exec -it -u www-data moodle-cron php admin/cli/fix_course_sequence.php -c=* --fix
 
-php admin/cli/fix_course_sequence.php -c=* --fix
+
 
 
 docker exec -it moodle-cron locale -a
+
+## MOOSH
+
+```Dockerfile
+# Create directory and extract Moosh
+RUN mkdir -p /opt/moosh \
+    && curl -L "https://github.com/tmuras/moosh/archive/master.tar.gz" | tar xz --strip-components=1 -C /opt/moosh/
+
+# Install dependencies
+# Note: --ignore-platform-reqs is often necessary for PHP 8.4 
+# until all upstream Moosh dependencies are updated.
+ENV COMPOSER_ROOT_VERSION=master
+RUN composer install \
+    --no-interaction \
+    --no-cache \
+    --working-dir=/opt/moosh \
+    --prefer-dist \
+    --ignore-platform-reqs
+
+# Make moosh executable and link it
+RUN chmod +x /opt/moosh/moosh.php \
+    && ln -s /opt/moosh/moosh.php /usr/local/bin/moosh
+```
+
+docker exec -it moodle-cron moosh -n generate-cfg
