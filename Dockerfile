@@ -1,4 +1,4 @@
-FROM php:8.4-cli-trixie
+FROM php:8.3-cli-trixie
 
 # So we can use it anywhere for conditional stuff. Keeping BC with old (non-buildkit, builders)
 ARG TARGETPLATFORM

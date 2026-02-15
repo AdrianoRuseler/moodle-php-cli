@@ -1,9 +1,9 @@
 # moodle-php-cli
 
-## php:8.4-cli-trixie
+## php:8.3-cli-trixie
 
 ```bash
-docker pull php:8.4-cli-trixie
+docker pull php:8.3-cli-trixie
 ```
 
 
@@ -12,10 +12,12 @@ docker pull php:8.4-cli-trixie
 - https://hub.docker.com/r/ruseler/moodle-php-cli
 
 ```bash
-docker build -t ruseler/moodle-php-cli:latest .
+docker build -t image_name:tag_name .
 ```
 
-php -r "echo date('Y-m-d H:i:s');"
+```bash
+docker build -t ruseler/moodle-php-cli:8.3 .
+```
 
 ## Composer
 
