@@ -137,3 +137,11 @@ RUN chmod +x /opt/moosh/moosh.php \
 ```
 
 docker exec -it moodle-cron moosh -n generate-cfg
+
+
+
+## References
+- https://github.com/moodlehq/moodle-php-apache
+- https://github.com/moodlehq/moodle-docker
+- https://github.com/erseco/alpine-moodle
+- https://github.com/tmuras/moosh
