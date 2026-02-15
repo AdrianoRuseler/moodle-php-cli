@@ -137,7 +137,26 @@ RUN chmod +x /opt/moosh/moosh.php \
 
 docker exec -it moodle-cron moosh -n generate-cfg
 
+moosh 
+docker exec -it moodle-cron moosh -p=/var/www/html/public auth-list
 
+
+docker exec -it moodle-cron moosh -p=/var/www/html/public languages-update
+
+```bash
+docker exec -it moodle-cron moosh -p=/var/www/html/public cache-add-redis-store "redis_local" "redis"
+```
+
+```bash
+docker exec -it moodle-cron moosh -p=/var/www/html/public cache-clear
+docker exec -it moodle-cron moosh -p=/var/www/html/public cache-config-get --all
+```
+moosh 
+
+moosh category-create mycat
+```bash
+docker exec -it moodle-cron moosh -p=/var/www/html/public category-create mycat
+```
 
 ## References
 - https://github.com/moodlehq/moodle-php-apache
