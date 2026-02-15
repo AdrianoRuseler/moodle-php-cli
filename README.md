@@ -37,8 +37,8 @@ docker exec -it -u www-data moodle-cron php admin/cli/install_database.php --agr
 
 ## Moodle CLI
 
-docker pull php:8.4-cli-alpine
-docker pull php:8.4-cli-trixie
+docker pull php:8.3-cli-alpine
+docker pull php:8.3-cli-trixie
 
 
 ```bash
