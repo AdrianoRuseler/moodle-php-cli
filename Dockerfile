@@ -41,6 +41,25 @@ RUN /tmp/setup/php-extensions.sh
 # Copy the Composer binary from the official Composer image
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# Create directory and extract Moosh
+RUN mkdir -p /opt/moosh \
+    && curl -L "https://github.com/tmuras/moosh/archive/master.tar.gz" | tar xz --strip-components=1 -C /opt/moosh/
+
+# Install dependencies
+# Note: --ignore-platform-reqs is often necessary for PHP 8.4 
+# until all upstream Moosh dependencies are updated.
+ENV COMPOSER_ROOT_VERSION=master
+RUN composer install \
+    --no-interaction \
+    --no-cache \
+    --working-dir=/opt/moosh \
+    --prefer-dist \
+    --ignore-platform-reqs
+
+# Make moosh executable and link it
+RUN chmod +x /opt/moosh/moosh.php \
+    && ln -s /opt/moosh/moosh.php /usr/local/bin/moosh
+    
 RUN mkdir /var/www/moodledata && chown www-data /var/www/moodledata && \
     mkdir /var/www/phpunitdata && chown www-data /var/www/phpunitdata && \
     mkdir /var/www/behatdata && chown www-data /var/www/behatdata && \
