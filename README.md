@@ -144,7 +144,7 @@ docker exec -it moodle-cron moosh -p=/var/www/html/public auth-list
 docker exec -it moodle-cron moosh -p=/var/www/html/public languages-update
 
 ```bash
-docker exec -it moodle-cron moosh -p=/var/www/html/public cache-add-redis-store "redis_local" "redis"
+docker exec -it moodle-cron moosh -n -p=/var/www/html/public cache-add-redis-store "redis_local" "redis"
 ```
 
 ```bash
@@ -155,7 +155,19 @@ moosh
 
 moosh category-create mycat
 ```bash
-docker exec -it moodle-cron moosh -p=/var/www/html/public category-create mycat
+docker exec -it -u www-data moodle-cron moosh -p=/var/www/html/public category-create mycat2
+```
+
+docker exec -it -u www-data moodle-cron bash
+www-data
+
+
+```bash
+docker exec -it -u www-data moodle-cron moosh -p=/var/www/html/public cohort-create mycohort1 mycohort2
+```
+
+```bash
+docker exec -it -u www-data moodle-cron moosh -p=/var/www/html/public config-plugins
 ```
 
 ## References
