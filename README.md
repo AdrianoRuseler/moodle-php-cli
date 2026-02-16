@@ -146,4 +146,5 @@ docker exec -it moodle-cron moosh -n generate-cfg
 - https://github.com/moodlehq/moodle-php-apache
 - https://github.com/moodlehq/moodle-docker
 - https://github.com/erseco/alpine-moodle
+- https://github.com/erseco/alpine-php-webserver
 - https://github.com/tmuras/moosh
