@@ -6,7 +6,6 @@
 docker pull php:8.3-cli-trixie
 ```
 
-
 ## Docker HUB
 
 - https://hub.docker.com/r/ruseler/moodle-php-cli
@@ -40,7 +39,6 @@ docker exec -it -u www-data moodle-cron php admin/cli/install_database.php --agr
 docker pull php:8.4-cli-alpine
 docker pull php:8.4-cli-trixie
 
-
 ```bash
 docker exec -it -u www-data moodle-cron composer install --no-dev --classmap-authoritative
 ```
@@ -52,24 +50,30 @@ docker exec -it -u www-data moodle-cron php admin/cli/cron.php
 ```bash
 docker exec -it -u www-data moodle-cron php admin/cli/checks.php
 ```
+
 - Enter Maintenance Mode
+
 ```bash
 docker exec -it -u www-data moodle-cron php admin/cli/maintenance.php --enable
 ```
+
 - Running Database Upgrade
+
 ```bash
 docker exec -it -u www-data moodle-app php admin/cli/upgrade.php --non-interactive
 ```
 
 - Clearing Caches
+
 ```bash
 docker exec -it -u www-data moodle-app php admin/cli/purge_caches.php
 ```
+
 - Disable Maintenance Mode
+
 ```bash
 docker exec -it -u www-data moodle-app php admin/cli/maintenance.php --disable
 ```
-
 
 ## OPCACHE
 
@@ -86,13 +90,12 @@ Since you are already using Redis, you generally don't need Memcached.
 APCu is excellent for Moodle's "Local Cache" (MUC).
 
 ```bash
-docker exec -u www-data moodle-cron php --ri apcu  
+docker exec -u www-data moodle-cron php --ri apcu
 ```
 
 ```bash
 docker exec -u www-data moodle-cron php --ri redis
 ```
-
 
 sudo -u www-data /usr/bin/php admin/cli/install.php --lang=CODE
 
@@ -108,10 +111,7 @@ docker exec -it -u www-data moodle-cron php admin/cli/scheduled_task.php --list
 docker exec -it -u www-data moodle-cron php admin/cli/scheduled_task.php --execute=\core\task\h5p_get_content_types_task
 ```
 
-docker exec -it -u www-data moodle-cron php admin/cli/fix_course_sequence.php -c=* --fix
-
-
-
+docker exec -it -u www-data moodle-cron php admin/cli/fix_course_sequence.php -c=\* --fix
 
 docker exec -it moodle-cron locale -a
 
@@ -123,7 +123,7 @@ RUN mkdir -p /opt/moosh \
     && curl -L "https://github.com/tmuras/moosh/archive/master.tar.gz" | tar xz --strip-components=1 -C /opt/moosh/
 
 # Install dependencies
-# Note: --ignore-platform-reqs is often necessary for PHP 8.4 
+# Note: --ignore-platform-reqs is often necessary for PHP 8.4
 # until all upstream Moosh dependencies are updated.
 ENV COMPOSER_ROOT_VERSION=master
 RUN composer install \
@@ -140,9 +140,8 @@ RUN chmod +x /opt/moosh/moosh.php \
 
 docker exec -it moodle-cron moosh -n generate-cfg
 
-
-
 ## References
+
 - https://github.com/moodlehq/moodle-php-apache
 - https://github.com/moodlehq/moodle-docker
 - https://github.com/erseco/alpine-moodle
